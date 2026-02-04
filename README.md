@@ -1,16 +1,69 @@
-# React + Vite
+# Live Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 1. Project Overview
+This project is a modern, responsive Personal Portfolio website designed to showcase professional expertise, data science projects, and technical skills. Built with **React** and **Vite**, it features a sleek, dark-themed UI with smooth animations and interactive elements to provide an engaging user experience.
 
-Currently, two official plugins are available:
+**Key Features:**
+*   **Responsive Design**: Fully optimized for desktops, tablets, and mobile devices.
+*   **Interactive UI**: Smooth transitions and animations powered by **Framer Motion**.
+*   **Project Showcase**: A dynamic gallery to display data science and development projects with GitHub and Demo links.
+*   **Contact Integration**: Easy-to-use contact section for professional inquiries.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 2. Tech Stack
+The project leverages a modern web development stack:
+*   **Frontend Library**: React 18
+*   **Build Tool**: Vite (for fast development and optimized builds)
+*   **Styling**: Tailwind CSS (utility-first CSS framework)
+*   **Animations**: Framer Motion
+*   **Icons**: Lucide React
 
-## React Compiler
+## 3. Sections
+The portfolio includes the following dedicated sections:
+1.  **Hero**: Introduction and resume download.
+2.  **About**: Professional background and summary.
+3.  **Skills**: visual representation of technical competencies (Python, Power BI, SQL, Machine Learning, etc.).
+4.  **Experience**: Timeline of professional work history.
+5.  **Projects**: Detailed cards for each project with descriptions, tech stack, and links.
+6.  **Certifications**: Display of professional achievements.
+7.  **Contact**: Social links and email connection.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 4. Installation & Deployment
 
-## Expanding the ESLint configuration
+### Local Development
+To run this project locally:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/Aditya0113/Portfolio.git
+    cd Portfolio
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+### Deployment
+The project is built for production using:
+```bash
+npm run build
+```
+The `dist` folder contains the optimized build artifacts ready for deployment to platforms like GitHub Pages, Vercel, or Netlify.
+
+## 5. Directory Structure
+```
+src/
+├── assets/         # Static assets (images, icons)
+├── components/     # Reusable React components (Hero, Navbar, Projects, etc.)
+├── App.jsx         # Main application layout
+├── main.jsx        # Entry point
+└── index.css       # Global styles and Tailwind imports
+```
+
+---
+*Developed by Aditya*
