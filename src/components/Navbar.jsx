@@ -59,7 +59,7 @@ const Navbar = () => {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-lg flex flex-col justify-center items-center md:hidden"
+                        className="fixed inset-0 z-50 bg-slate-950 flex flex-col justify-center items-center md:hidden"
                     >
                         {/* Close Button inside Overlay ensures it's accessible */}
                         <button
