@@ -80,7 +80,8 @@ const Navbar = () => {
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="fixed top-0 right-0 h-full w-[75%] max-w-xs bg-[#020617] border-l border-slate-800 shadow-2xl z-[9999] md:hidden flex flex-col pt-24 px-6"
+                            className="fixed top-0 right-0 h-full w-[75%] max-w-xs border-l border-slate-800 shadow-2xl md:hidden flex flex-col pt-24 px-6"
+                            style={{ backgroundColor: '#020617', zIndex: 9999, position: 'fixed', top: 0, right: 0 }}
                         >
                             {/* Close Button Inside Drawer */}
                             <button
