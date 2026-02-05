@@ -82,6 +82,14 @@ const Navbar = () => {
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                             className="fixed top-0 right-0 h-full w-[75%] max-w-xs bg-slate-900 border-l border-slate-800 shadow-2xl z-[9999] md:hidden flex flex-col pt-24 px-6"
                         >
+                            {/* Close Button Inside Drawer */}
+                            <button
+                                onClick={() => setIsOpen(false)}
+                                className="absolute top-6 right-6 p-2 text-slate-400 hover:text-white transition-colors hover:bg-slate-800 rounded-full"
+                                aria-label="Close Menu"
+                            >
+                                <X size={32} />
+                            </button>
                             <div className="flex flex-col gap-2">
                                 {navLinks.map((link) => (
                                     <a
