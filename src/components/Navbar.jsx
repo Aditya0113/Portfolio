@@ -56,18 +56,26 @@ const Navbar = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-slate-900 border-b border-slate-800 overflow-hidden"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-lg flex flex-col justify-center items-center md:hidden"
                     >
-                        <div className="flex flex-col items-center py-8 gap-6">
+                        {/* Close Button inside Overlay ensures it's accessible */}
+                        <button
+                            className="absolute top-6 right-12 text-slate-400 hover:text-white p-2"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            <X size={32} />
+                        </button>
+
+                        <div className="flex flex-col items-center gap-8">
                             {navLinks.map((link) => (
                                 <a
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-slate-300 hover:text-cyan-400 text-2xl font-medium"
+                                    className="text-3xl font-semibold text-slate-300 hover:text-cyan-400 transition-colors"
                                 >
                                     {link.name}
                                 </a>
