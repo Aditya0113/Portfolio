@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User, Briefcase, Cpu, FolderGit2, Award, Mail } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -14,19 +14,28 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Prevent scrolling when menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+    }, [isOpen]);
+
     const navLinks = [
-        { name: 'About', href: '#about' },
-        { name: 'Experience', href: '#experience' },
-        { name: 'Skills', href: '#skills' },
-        { name: 'Projects', href: '#projects' },
-        { name: 'Certificates', href: '#certificates' },
-        { name: 'Contact', href: '#contact' },
+        { name: 'About', href: '#about', icon: <User size={20} /> },
+        { name: 'Experience', href: '#experience', icon: <Briefcase size={20} /> },
+        { name: 'Skills', href: '#skills', icon: <Cpu size={20} /> },
+        { name: 'Projects', href: '#projects', icon: <FolderGit2 size={20} /> },
+        { name: 'Certificates', href: '#certificates', icon: <Award size={20} /> },
+        { name: 'Contact', href: '#contact', icon: <Mail size={20} /> },
     ];
 
     return (
         <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/80 backdrop-blur-md border-b border-slate-800 py-4' : 'bg-transparent py-6'}`}>
-            <div className="max-w-7xl mx-auto px-12 flex justify-between items-center">
-                <a href="#" className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 tracking-tighter">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+                <a href="#" className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 tracking-tighter z-50 relative">
                     AR.
                 </a>
 
@@ -45,43 +54,59 @@ const Navbar = () => {
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden text-slate-300 hover:text-white"
+                    className="md:hidden text-slate-300 hover:text-cyan-400 transition-colors z-50 relative p-2"
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
             </div>
 
-            {/* Mobile Menu Overlay */}
+            {/* Mobile Menu Backdrop & Drawer */}
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-0 z-[100] bg-[#020617] flex flex-col justify-center items-center md:hidden"
-                    >
-                        {/* Close Button inside Overlay ensures it's accessible */}
-                        <button
-                            className="absolute top-6 right-12 text-slate-400 hover:text-white p-2"
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
                             onClick={() => setIsOpen(false)}
-                        >
-                            <X size={32} />
-                        </button>
+                            className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-40 md:hidden"
+                        />
 
-                        <div className="flex flex-col items-center gap-8">
-                            {navLinks.map((link) => (
-                                <a
-                                    key={link.name}
-                                    href={link.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className="text-3xl font-semibold text-slate-300 hover:text-cyan-400 transition-colors"
-                                >
-                                    {link.name}
-                                </a>
-                            ))}
-                        </div>
-                    </motion.div>
+                        {/* Side Drawer */}
+                        <motion.div
+                            initial={{ x: '100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '100%' }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            className="fixed top-0 right-0 h-full w-[75%] max-w-xs bg-slate-900 border-l border-slate-800 shadow-2xl z-50 md:hidden flex flex-col pt-24 px-6"
+                        >
+                            <div className="flex flex-col gap-2">
+                                {navLinks.map((link) => (
+                                    <a
+                                        key={link.name}
+                                        href={link.href}
+                                        onClick={() => setIsOpen(false)}
+                                        className="group flex items-center gap-4 p-4 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all border border-transparent hover:border-slate-700/50"
+                                    >
+                                        <span className="text-cyan-500/70 group-hover:text-cyan-400 transition-colors">
+                                            {link.icon}
+                                        </span>
+                                        <span className="text-lg font-medium tracking-wide">
+                                            {link.name}
+                                        </span>
+                                    </a>
+                                ))}
+                            </div>
+
+                            <div className="mt-auto mb-8 pt-6 border-t border-slate-800">
+                                <p className="text-xs text-slate-500 text-center uppercase tracking-widest">
+                                    © 2024 Aditya Raj
+                                </p>
+                            </div>
+                        </motion.div>
+                    </>
                 )}
             </AnimatePresence>
         </nav>
