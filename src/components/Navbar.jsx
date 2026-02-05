@@ -6,8 +6,10 @@ import { Menu, X, User, Briefcase, Cpu, FolderGit2, Award, Mail } from 'lucide-r
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
         };
@@ -63,7 +65,7 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Backdrop & Drawer - Moved to Portal for Z-Index Isolation */}
-            {typeof document !== 'undefined' && createPortal(
+            {mounted && createPortal(
                 <AnimatePresence>
                     {isOpen && (
                         <>
