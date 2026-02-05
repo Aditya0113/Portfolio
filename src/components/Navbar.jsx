@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, User, Briefcase, Cpu, FolderGit2, Award, Mail } from 'lucide-react';
 
