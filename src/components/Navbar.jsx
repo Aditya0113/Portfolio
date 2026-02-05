@@ -61,63 +61,68 @@ const Navbar = () => {
                 </button>
             </div>
 
-            {/* Mobile Menu Backdrop & Drawer */}
-            <AnimatePresence>
-                {isOpen && (
-                    <>
-                        {/* Backdrop */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setIsOpen(false)}
-                            className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-[9998] md:hidden"
-                        />
-
-                        {/* Side Drawer */}
-                        <motion.div
-                            initial={{ x: '100%' }}
-                            animate={{ x: 0 }}
-                            exit={{ x: '100%' }}
-                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="fixed top-0 right-0 h-full w-[75%] max-w-xs border-l border-slate-800 shadow-2xl md:hidden flex flex-col pt-24 px-6"
-                            style={{ backgroundColor: '#020617', zIndex: 9999, position: 'fixed', top: 0, right: 0 }}
-                        >
-                            {/* Close Button Inside Drawer */}
-                            <button
+            {/* Mobile Menu Backdrop & Drawer - Moved to Portal for Z-Index Isolation */}
+            {typeof document !== 'undefined' && createPortal(
+                <AnimatePresence>
+                    {isOpen && (
+                        <>
+                            {/* Backdrop */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
                                 onClick={() => setIsOpen(false)}
-                                className="absolute top-6 right-6 p-2 text-slate-400 hover:text-white transition-colors hover:bg-slate-800 rounded-full"
-                                aria-label="Close Menu"
-                            >
-                                <X size={32} />
-                            </button>
-                            <div className="flex flex-col gap-2">
-                                {navLinks.map((link) => (
-                                    <a
-                                        key={link.name}
-                                        href={link.href}
-                                        onClick={() => setIsOpen(false)}
-                                        className="group flex items-center gap-4 p-4 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all border border-transparent hover:border-slate-700/50"
-                                    >
-                                        <span className="text-cyan-500/70 group-hover:text-cyan-400 transition-colors">
-                                            {link.icon}
-                                        </span>
-                                        <span className="text-lg font-medium tracking-wide">
-                                            {link.name}
-                                        </span>
-                                    </a>
-                                ))}
-                            </div>
+                                className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-[9998] md:hidden"
+                                style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 9998 }}
+                            />
 
-                            <div className="mt-auto mb-8 pt-6 border-t border-slate-800">
-                                <p className="text-xs text-slate-500 text-center uppercase tracking-widest">
-                                    © 2024 Aditya Raj
-                                </p>
-                            </div>
-                        </motion.div>
-                    </>
-                )}
-            </AnimatePresence>
+                            {/* Side Drawer */}
+                            <motion.div
+                                initial={{ x: '100%' }}
+                                animate={{ x: 0 }}
+                                exit={{ x: '100%' }}
+                                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                                className="fixed top-0 right-0 h-full w-[75%] max-w-xs border-l border-slate-800 shadow-2xl md:hidden flex flex-col pt-24 px-6"
+                                style={{ backgroundColor: '#020617', zIndex: 9999, position: 'fixed', top: 0, right: 0 }}
+                            >
+                                {/* Close Button Inside Drawer */}
+                                <button
+                                    onClick={() => setIsOpen(false)}
+                                    className="absolute top-6 right-6 p-2 text-slate-400 hover:text-white transition-colors hover:bg-slate-800 rounded-full"
+                                    aria-label="Close Menu"
+                                >
+                                    <X size={32} />
+                                </button>
+
+                                <div className="flex flex-col gap-2">
+                                    {navLinks.map((link) => (
+                                        <a
+                                            key={link.name}
+                                            href={link.href}
+                                            onClick={() => setIsOpen(false)}
+                                            className="group flex items-center gap-4 p-4 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all border border-transparent hover:border-slate-700/50"
+                                        >
+                                            <span className="text-cyan-500/70 group-hover:text-cyan-400 transition-colors">
+                                                {link.icon}
+                                            </span>
+                                            <span className="text-lg font-medium tracking-wide">
+                                                {link.name}
+                                            </span>
+                                        </a>
+                                    ))}
+                                </div>
+
+                                <div className="mt-auto mb-8 pt-6 border-t border-slate-800">
+                                    <p className="text-xs text-slate-500 text-center uppercase tracking-widest">
+                                        © 2024 Aditya Raj
+                                    </p>
+                                </div>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </nav>
     );
 };
