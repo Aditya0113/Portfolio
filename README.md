@@ -1,5 +1,7 @@
 # Live Portfolio
 
+[**🚀 Live Demo**](https://portfolio-kappa-jet-j8m6a4s3d6.vercel.app/)
+
 ## 1. Project Overview
 This project is a modern, responsive Personal Portfolio website designed to showcase professional expertise, data science projects, and technical skills. Built with **React** and **Vite**, it features a sleek, dark-themed UI with smooth animations and interactive elements to provide an engaging user experience.
 
