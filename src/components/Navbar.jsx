@@ -71,7 +71,7 @@ const Navbar = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setIsOpen(false)}
-                            className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-40 md:hidden"
+                            className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-[9998] md:hidden"
                         />
 
                         {/* Side Drawer */}
@@ -80,7 +80,7 @@ const Navbar = () => {
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="fixed top-0 right-0 h-full w-[75%] max-w-xs bg-slate-900 border-l border-slate-800 shadow-2xl z-50 md:hidden flex flex-col pt-24 px-6"
+                            className="fixed top-0 right-0 h-full w-[75%] max-w-xs bg-slate-900 border-l border-slate-800 shadow-2xl z-[9999] md:hidden flex flex-col pt-24 px-6"
                         >
                             <div className="flex flex-col gap-2">
                                 {navLinks.map((link) => (
