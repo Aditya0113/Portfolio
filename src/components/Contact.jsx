@@ -1,8 +1,52 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+    const form = useRef();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [status, setStatus] = useState({ type: '', message: '' });
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setStatus({ type: '', message: '' });
+
+        emailjs
+            .sendForm(
+                'service_szow7xj',
+                'template_038d8h4',
+                form.current,
+                {
+                    publicKey: 'JogAZhNVErWLUEkkB',
+                }
+            )
+            .then(
+                () => {
+                    setStatus({
+                        type: 'success',
+                        message: 'Message sent successfully! I will get back to you soon.',
+                    });
+                    form.current.reset();
+                },
+                (error) => {
+                    setStatus({
+                        type: 'error',
+                        message: 'Failed to send message. Please try again later.',
+                    });
+                    console.error('FAILED...', error.text);
+                }
+            )
+            .finally(() => {
+                setIsSubmitting(false);
+                // Clear success message after 5 seconds
+                setTimeout(() => {
+                    setStatus(prev => prev.type === 'success' ? { type: '', message: '' } : prev);
+                }, 5000);
+            });
+    };
+
     return (
         <section id="contact" className="py-20 bg-slate-950 px-4">
             <div className="max-w-6xl mx-auto">
@@ -67,36 +111,95 @@ const Contact = () => {
                         className="bg-slate-900/40 p-8 rounded-2xl border border-slate-800"
                     >
                         <h3 className="text-3xl font-bold text-white mb-8">Send a Message</h3>
-                        <form className="space-y-6">
+
+                        <form ref={form} onSubmit={sendEmail} className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="text-base font-medium text-slate-300">First Name</label>
-                                    <input type="text" placeholder="Your first name" className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg" />
+                                    <input
+                                        type="text"
+                                        name="first_name"
+                                        required
+                                        placeholder="Your first name"
+                                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg"
+                                    />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-base font-medium text-slate-300">Last Name</label>
-                                    <input type="text" placeholder="Your last name" className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg" />
+                                    <input
+                                        type="text"
+                                        name="last_name"
+                                        required
+                                        placeholder="Your last name"
+                                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg"
+                                    />
                                 </div>
                             </div>
 
                             <div className="space-y-2">
                                 <label className="text-base font-medium text-slate-300">Email</label>
-                                <input type="email" placeholder="your.email@example.com" className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg" />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    required
+                                    placeholder="your.email@example.com"
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg"
+                                    disabled={isSubmitting}
+                                />
                             </div>
 
                             <div className="space-y-2">
                                 <label className="text-base font-medium text-slate-300">Subject</label>
-                                <input type="text" placeholder="Project inquiry, collaboration, etc." className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg" />
+                                <input
+                                    type="text"
+                                    name="subject"
+                                    required
+                                    placeholder="Project inquiry, collaboration, etc."
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg"
+                                    disabled={isSubmitting}
+                                />
                             </div>
 
                             <div className="space-y-2">
                                 <label className="text-base font-medium text-slate-300">Message</label>
-                                <textarea rows="4" placeholder="Tell me about your project or how I can help..." className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none text-lg"></textarea>
+                                <textarea
+                                    name="message"
+                                    required
+                                    rows="4"
+                                    placeholder="Tell me about your project or how I can help..."
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none text-lg"
+                                    disabled={isSubmitting}
+                                ></textarea>
                             </div>
 
-                            <button type="submit" className="w-full bg-slate-800 hover:bg-slate-700 text-white font-medium py-4 rounded-lg transition-all flex items-center justify-center gap-2 group text-lg">
-                                <Send size={20} className="group-hover:translate-x-1 transition-transform" />
-                                Send Message
+                            {status.message && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className={`p-4 rounded-lg flex items-center gap-2 ${status.type === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                                        }`}
+                                >
+                                    {status.type === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
+                                    <p className="text-sm font-medium">{status.message}</p>
+                                </motion.div>
+                            )}
+
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full bg-slate-800 hover:bg-slate-700 text-white font-medium py-4 rounded-lg transition-all flex items-center justify-center gap-2 group text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {isSubmitting ? (
+                                    <>
+                                        <Loader2 size={20} className="animate-spin" />
+                                        Sending...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Send size={20} className="group-hover:translate-x-1 transition-transform" />
+                                        Send Message
+                                    </>
+                                )}
                             </button>
                         </form>
                     </motion.div>
