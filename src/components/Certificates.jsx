@@ -10,7 +10,7 @@ const Certificates = () => {
             date: "July 2025",
             type: "Professional Simulation",
             description: "Completed a job simulation involving data quality assessment, data insights, and presentation of findings.",
-            link: "#"
+            link: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_zx6AfKLR6ZbY6P2yC_1752341833333_completion_certificate.pdf"
         },
         {
             name: "AWS: Data Analytics",
@@ -18,7 +18,7 @@ const Certificates = () => {
             date: "July 2025",
             type: "Cloud Analytics",
             description: "Comprehensive training in AWS data analytics services and cloud-based data solutions.",
-            link: "#"
+            link: "https://www.coursera.org/account/accomplishments/verify/C8LI7MNHHJ5Z"
         },
         {
             name: "Data Analytics MasterClass",
@@ -26,7 +26,7 @@ const Certificates = () => {
             date: "July 2025 to Aug 2025",
             type: "Data Analytics",
             description: "Successfully completed a 30-day MasterClass in Data Analytics conducted by NoviTech R&D Pvt. Ltd.",
-            link: "#"
+            link: "https://drive.google.com/file/d/1pOjtbHFkrp15dnpNYItC7CzTk3fl6qmN/view?usp=sharing"
         },
         {
             name: "Data Structures and Algorithms",
@@ -34,7 +34,7 @@ const Certificates = () => {
             date: "Dec 2024 - July 2025",
             type: "Course Completion",
             description: "Comprehensive course covering fundamental data structures and algorithm design patterns.",
-            link: "#"
+            link: "https://www.geeksforgeeks.org/certificate/c2ee2f8d230857bd0d2b48cf280e499f"
         },
         {
             name: "Introduction to MS Excel",
@@ -42,7 +42,7 @@ const Certificates = () => {
             date: "July 2025",
             type: "Certification",
             description: "Foundational training in Microsoft Excel, covering formulas, functions, and data management.",
-            link: "#"
+            link: "https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIxNzc3IiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvODY2NjU3Nl81NzU2NzM4MTc1MzE3NzkwMzY1OS5wbmciLCJ1c2VybmFtZSI6IkFkaXR5YSBSYWoifQ%3D%3D&utm_source=shared-certificate&utm_medium=lms&utm_campaign=shared-certificate-promotion&referrer=https%3A%2F%2Flms.simplilearn.com%2Fcourses%2F4277%2FIntroduction%2520to%2520MS%2520Excel%2Fcertificate%2Fdownload-skillup&%24web_only=true&_branch_match_id=1494903871592078193&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXL87MLcjJ1EssKNDLyczL1k%2FVdw53KgxKDI0qj0yyrytKTUstKsrMS49PKsovL04tsnXOKMrPTQUAmmDpsT8AAAA%3D"
         },
         {
             name: "Excel Automation using ChatGPT",
@@ -50,7 +50,7 @@ const Certificates = () => {
             date: "July 2025",
             type: "Automation",
             description: "Advanced Excel automation techniques using AI-powered tools and ChatGPT integration.",
-            link: "#"
+            link: "https://lms.simplilearn.com/courses/6062/Excel%20Automation%20using%20ChatGPT/certificate/download-skillup"
         },
         {
             name: "Code-A-Haunt 24 Hour Hackathon",
@@ -58,7 +58,7 @@ const Certificates = () => {
             date: "Feb 2024 - Mar 2024",
             type: "Hackathon Participation",
             description: "Participated in the 24-hour Code-A-Haunt Hackathon showcasing strong coding and problem-solving skills.",
-            link: "#"
+            link: "https://drive.google.com/file/d/1z25zK7OGONq222CQ64h15TCA7fZ9eLkT/view?usp=sharing"
         },
     ];
 
@@ -113,7 +113,7 @@ const Certificates = () => {
                                         {cert.description}
                                     </p>
 
-                                    <a href={cert.link} className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-base font-medium transition-colors">
+                                    <a href={cert.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-base font-medium transition-colors">
                                         <ExternalLink size={16} /> View Certificate
                                     </a>
                                 </div>
