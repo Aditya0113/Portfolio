@@ -1,20 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, User, Briefcase, Cpu, FolderGit2, Award, Mail } from 'lucide-react';
+import { Menu, X, User, Briefcase, Cpu, FolderGit2, Award, Mail, Home } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState('Home');
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    const navItem = navLinks.find(link => link.href === `#${id}`);
+                    if (navItem) {
+                        setActiveSection(navItem.name);
+                    }
+                }
+            });
+        }, { threshold: 0.3, rootMargin: "-10% 0px -50% 0px" });
+
+        document.querySelectorAll('section[id]').forEach((section) => {
+            observer.observe(section);
+        });
+
+        return () => observer.disconnect();
     }, []);
 
     // Prevent scrolling when menu is open
@@ -27,6 +40,7 @@ const Navbar = () => {
     }, [isOpen]);
 
     const navLinks = [
+        { name: 'Home', href: '#home', icon: <Home size={20} /> },
         { name: 'About', href: '#about', icon: <User size={20} /> },
         { name: 'Experience', href: '#experience', icon: <Briefcase size={20} /> },
         { name: 'Skills', href: '#skills', icon: <Cpu size={20} /> },
@@ -36,35 +50,70 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/80 backdrop-blur-md border-b border-slate-800 py-4' : 'bg-transparent py-6'}`}>
-            <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-                <a href="#" className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 tracking-tighter z-50 relative">
-                    AR.
-                </a>
+        <>
+            <motion.nav 
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="fixed top-0 left-0 w-full z-50 pt-6 px-4 md:px-8 pointer-events-none"
+            >
+                <div className="flex justify-between items-center max-w-[1800px] mx-auto w-full pointer-events-auto">
+                    
+                    {/* Far Left Side Label (Outside Pill) */}
+                    <div className="hidden lg:flex flex-col text-[11px] font-bold tracking-[0.2em] leading-[1.3] text-slate-500 w-[140px] shrink-0">
+                        <span>DATA</span>
+                        <span>ANALYST</span>
+                        <span>SPECIALIST</span>
+                    </div>
 
-                {/* Desktop Menu */}
-                <div className="hidden md:flex gap-10">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.href}
-                            className="text-slate-300 hover:text-cyan-400 transition-colors text-xl font-medium tracking-wide hover:scale-105 transform"
+                    {/* Wide Center Pill */}
+                    <div className="flex-1 max-w-5xl mx-auto bg-[#1A1F2E]/80 backdrop-blur-3xl border border-white/5 p-2 rounded-full flex items-center justify-between shadow-[0_10px_40px_rgba(0,0,0,0.6)] transition-all">
+                        
+                        {/* Avatar & Name Area (Left Side of Pill) */}
+                        <div className="flex items-center gap-4 pl-2 shrink-0 lg:w-[220px]">
+                            <div className="w-[42px] h-[42px] rounded-full bg-gradient-to-br from-[#00bfff] to-[#C56CEF] flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(0,191,255,0.3)] relative overflow-hidden">
+                                <div className="absolute inset-[1.5px] bg-[#0B0C10] rounded-full z-0"></div>
+                                <span className="text-sm font-bold text-white z-10 tracking-widest pl-0.5">AR</span>
+                            </div>
+                            <div className="flex flex-col justify-center">
+                                <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#00bfff] mb-0.5">Portfolio</span>
+                                <span className="text-[14px] font-bold text-white leading-none tracking-wide whitespace-nowrap">Aditya Raj</span>
+                            </div>
+                        </div>
+
+                        {/* Navigation Links Area (Right side of Pill) */}
+                        <div className="hidden lg:flex flex-1 items-center justify-end gap-1 pr-2">
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setActiveSection(link.name)}
+                                    className={`px-5 py-2.5 rounded-full text-[13px] font-semibold tracking-wider transition-all duration-300 relative overflow-hidden ${
+                                        activeSection === link.name 
+                                            ? 'text-white bg-white/10 shadow-md' 
+                                            : 'text-slate-400 hover:text-white hover:bg-white/5'
+                                    }`}
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                        </div>
+
+                        {/* Mobile Menu Toggle */}
+                        <button
+                            className="lg:hidden p-3 ml-auto mr-1 text-slate-300 hover:text-white rounded-full hover:bg-white/10 transition-colors"
+                            onClick={() => setIsOpen(!isOpen)}
                         >
-                            {link.name}
-                        </a>
-                    ))}
+                            {isOpen ? <X size={22} /> : <Menu size={22} />}
+                        </button>
+                    </div>
+
+                    {/* Far Right Area (Empty Spacer to balance Far Left Label) */}
+                    <div className="hidden lg:block w-[140px] shrink-0"></div>
                 </div>
+            </motion.nav>
 
-                {/* Mobile Menu Button */}
-                <button
-                    className="md:hidden text-slate-300 hover:text-cyan-400 transition-colors z-50 relative p-2"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <X size={28} /> : <Menu size={28} />}
-                </button>
-            </div>
-
-            {/* Mobile Menu Backdrop & Drawer - Moved to Portal for Z-Index Isolation */}
+            {/* Mobile Menu Backdrop & Drawer */}
             {mounted && createPortal(
                 <AnimatePresence>
                     {isOpen && (
@@ -75,7 +124,7 @@ const Navbar = () => {
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 onClick={() => setIsOpen(false)}
-                                className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-[9998] md:hidden"
+                                className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-[9998] xl:hidden"
                                 style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 9998 }}
                             />
 
@@ -85,10 +134,9 @@ const Navbar = () => {
                                 animate={{ x: 0 }}
                                 exit={{ x: '100%' }}
                                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                                className="fixed top-0 right-0 h-full w-[75%] max-w-xs border-l border-slate-800 shadow-2xl md:hidden flex flex-col pt-24 px-6"
+                                className="fixed top-0 right-0 h-full w-[75%] max-w-xs border-l border-slate-800 shadow-2xl xl:hidden flex flex-col pt-24 px-6"
                                 style={{ backgroundColor: '#020617', zIndex: 9999, position: 'fixed', top: 0, right: 0 }}
                             >
-                                {/* Close Button Inside Drawer */}
                                 <button
                                     onClick={() => setIsOpen(false)}
                                     className="absolute top-6 right-6 p-2 text-slate-400 hover:text-white transition-colors hover:bg-slate-800 rounded-full"
@@ -102,13 +150,20 @@ const Navbar = () => {
                                         <a
                                             key={link.name}
                                             href={link.href}
-                                            onClick={() => setIsOpen(false)}
-                                            className="group flex items-center gap-4 p-4 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all border border-transparent hover:border-slate-700/50"
+                                            onClick={() => {
+                                                setIsOpen(false);
+                                                setActiveSection(link.name);
+                                            }}
+                                            className={`group flex items-center gap-4 p-4 rounded-xl transition-all border border-transparent hover:border-slate-700/50 ${
+                                                activeSection === link.name
+                                                    ? 'bg-slate-800/80 text-white'
+                                                    : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                                            }`}
                                         >
-                                            <span className="text-cyan-500/70 group-hover:text-cyan-400 transition-colors">
+                                            <span className={`${activeSection === link.name ? 'text-[#00bfff]' : 'text-slate-500 group-hover:text-cyan-400'} transition-colors`}>
                                                 {link.icon}
                                             </span>
-                                            <span className="text-lg font-medium tracking-wide">
+                                            <span className="text-base font-medium tracking-wide">
                                                 {link.name}
                                             </span>
                                         </a>
@@ -126,7 +181,7 @@ const Navbar = () => {
                 </AnimatePresence>,
                 document.body
             )}
-        </nav>
+        </>
     );
 };
 

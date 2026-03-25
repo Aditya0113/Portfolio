@@ -9,10 +9,12 @@ import Contact from './components/Contact';
 
 import About from './components/About';
 import ScrollToTop from './components/ScrollToTop';
+import CustomCursor from './components/CustomCursor';
 
 function App() {
   return (
-    <div className="bg-slate-950 min-h-screen text-white selection:bg-cyan-500/30 font-sans">
+    <div className="bg-[#0B0C10] min-h-screen text-white selection:bg-cyan-500/30 font-sans">
+      <CustomCursor />
       <ScrollToTop />
       <Navbar />
       <main>

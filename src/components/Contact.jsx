@@ -26,178 +26,166 @@ const Contact = () => {
                 () => {
                     setStatus({
                         type: 'success',
-                        message: 'Message sent successfully! I will get back to you soon.',
+                        message: 'Signal received successfully! I will get back to you soon.',
                     });
                     form.current.reset();
                 },
                 (error) => {
                     setStatus({
                         type: 'error',
-                        message: 'Failed to send message. Please try again later.',
+                        message: 'Failed to transmit message. Please try again later.',
                     });
                     console.error('FAILED...', error.text);
                 }
             )
             .finally(() => {
                 setIsSubmitting(false);
-                // Clear success message after 5 seconds
                 setTimeout(() => {
                     setStatus(prev => prev.type === 'success' ? { type: '', message: '' } : prev);
                 }, 5000);
             });
     };
 
+    const headingText = "Get In Touch".split("");
+
     return (
-        <section id="contact" className="py-20 bg-slate-950 px-4">
-            <div className="max-w-6xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">Get In <span className="text-cyan-400">Touch</span></h2>
-                    <div className="w-24 h-1 bg-cyan-500 mx-auto rounded-full opacity-50 mb-8"></div>
-                    <p className="text-slate-400 max-w-3xl mx-auto text-xl">
+        <section id="contact" className="py-24 relative overflow-hidden px-4">
+            {/* Background elements */}
+            <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] bg-cyan-900/10 rounded-full blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-[10%] right-[-10%] w-[400px] h-[400px] bg-purple-900/10 rounded-full blur-[150px] pointer-events-none" />
+
+            <div className="max-w-6xl mx-auto relative z-10">
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 flex justify-center flex-wrap">
+                        {headingText.map((letter, i) => (
+                            <motion.span
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4, delay: i * 0.05 }}
+                                className={letter === ' ' ? 'mr-3' : (i >= 7 ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#00bfff] to-[#C56CEF]' : '')}
+                            >
+                                {letter}
+                            </motion.span>
+                        ))}
+                    </h2>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5, duration: 0.8 }}
+                        className="text-slate-400 max-w-2xl mx-auto text-lg font-light tracking-wide"
+                    >
                         Ready to transform data into insights? Let's discuss how I can help drive your business decisions with analytics.
-                    </p>
-                </motion.div>
+                    </motion.p>
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     {/* Contact Info */}
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="bg-slate-900/40 p-8 rounded-2xl border border-slate-800 h-full"
+                        transition={{ duration: 0.6 }}
+                        className="glass-card p-8 md:p-12 rounded-3xl h-full flex flex-col"
                     >
-                        <h3 className="text-3xl font-bold text-white mb-8">Contact Information</h3>
-                        <div className="space-y-8">
+                        <h3 className="text-3xl font-bold text-white mb-10 tracking-tight">Contact Information</h3>
+                        <div className="space-y-8 flex-grow">
                             <ContactItem
                                 icon={<Mail size={24} />}
                                 title="Email"
                                 content="kumarm8445@gmail.com"
                                 href="mailto:kumarm8445@gmail.com"
+                                color="#00bfff"
                             />
                             <ContactItem
                                 icon={<Phone size={24} />}
                                 title="Phone"
                                 content="+91 9060483918"
                                 href="tel:+919060483918"
+                                color="#C56CEF"
                             />
                             <ContactItem
                                 icon={<MapPin size={24} />}
                                 title="Location"
                                 content="Navratan Pur, Bari Khagaul, Patna, Bihar 801105"
+                                color="#27C93F"
                             />
                         </div>
 
-                        <div className="mt-12">
-                            <h4 className="text-white font-semibold mb-6 text-xl">Connect with me</h4>
+                        <div className="mt-12 pt-8 border-t border-white/5">
+                            <h4 className="text-slate-300 font-medium tracking-wide mb-6 text-sm uppercase">Connect Network</h4>
                             <div className="flex gap-4">
-                                <SocialButton href="https://linkedin.com/in/adityaraj0213" icon={<Linkedin size={24} />} />
-                                <SocialButton href="https://github.com/Aditya0113" icon={<Github size={24} />} />
-                                <SocialButton href="mailto:kumarm8445@gmail.com" icon={<Mail size={24} />} />
+                                <SocialButton href="https://linkedin.com/in/adityaraj0213" icon={<Linkedin size={22} />} color="#00bfff" />
+                                <SocialButton href="https://github.com/Aditya0113" icon={<Github size={22} />} color="#C56CEF" />
+                                <SocialButton href="mailto:kumarm8445@gmail.com" icon={<Mail size={22} />} color="#FF5F56" />
                             </div>
                         </div>
                     </motion.div>
 
                     {/* Contact Form */}
                     <motion.div
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="bg-slate-900/40 p-8 rounded-2xl border border-slate-800"
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="glass-card p-8 md:p-12 rounded-3xl"
                     >
-                        <h3 className="text-3xl font-bold text-white mb-8">Send a Message</h3>
+                        <h3 className="text-3xl font-bold text-white mb-8 tracking-tight">Transmit Data</h3>
 
                         <form ref={form} onSubmit={sendEmail} className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-base font-medium text-slate-300">First Name</label>
-                                    <input
-                                        type="text"
-                                        name="first_name"
-                                        required
-                                        placeholder="Your first name"
-                                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-base font-medium text-slate-300">Last Name</label>
-                                    <input
-                                        type="text"
-                                        name="last_name"
-                                        required
-                                        placeholder="Your last name"
-                                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg"
-                                    />
-                                </div>
+                                <InputField label="First Name" name="first_name" placeholder="John" disabled={isSubmitting} />
+                                <InputField label="Last Name" name="last_name" placeholder="Doe" disabled={isSubmitting} />
                             </div>
 
-                            <div className="space-y-2">
-                                <label className="text-base font-medium text-slate-300">Email</label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    required
-                                    placeholder="your.email@example.com"
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg"
-                                    disabled={isSubmitting}
-                                />
-                            </div>
+                            <InputField label="Email" name="email" type="email" placeholder="john.doe@example.com" disabled={isSubmitting} />
+                            <InputField label="Subject" name="subject" placeholder="Project inquiry, collaboration, etc." disabled={isSubmitting} />
 
-                            <div className="space-y-2">
-                                <label className="text-base font-medium text-slate-300">Subject</label>
-                                <input
-                                    type="text"
-                                    name="subject"
-                                    required
-                                    placeholder="Project inquiry, collaboration, etc."
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors text-lg"
-                                    disabled={isSubmitting}
-                                />
-                            </div>
-
-                            <div className="space-y-2">
-                                <label className="text-base font-medium text-slate-300">Message</label>
+                            <div className="space-y-2 group">
+                                <label className="text-xs font-semibold tracking-wide text-slate-400 uppercase ml-1 group-focus-within:text-[#00bfff] transition-colors">Message</label>
                                 <textarea
                                     name="message"
                                     required
                                     rows="4"
                                     placeholder="Tell me about your project or how I can help..."
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none text-lg"
+                                    className="w-full bg-[#0B0C10]/50 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-slate-600 focus:outline-none focus:border-[#00bfff] focus:ring-1 focus:ring-[#00bfff] transition-all duration-300 resize-none text-sm font-light shadow-inner"
                                     disabled={isSubmitting}
                                 ></textarea>
                             </div>
 
+                            {/* Status Message */}
                             {status.message && (
                                 <motion.div
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className={`p-4 rounded-lg flex items-center gap-2 ${status.type === 'success' ? 'bg-green-500/10 text-green-400 border border-green-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'
+                                    initial={{ opacity: 0, height: 0, y: -10 }}
+                                    animate={{ opacity: 1, height: 'auto', y: 0 }}
+                                    className={`p-4 rounded-xl flex items-center gap-3 backdrop-blur-md ${status.type === 'success' ? 'bg-[#27C93F]/10 text-[#27C93F] border border-[#27C93F]/20' : 'bg-[#FF5F56]/10 text-[#FF5F56] border border-[#FF5F56]/20'
                                         }`}
                                 >
                                     {status.type === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
-                                    <p className="text-sm font-medium">{status.message}</p>
+                                    <p className="text-sm font-medium tracking-wide">{status.message}</p>
                                 </motion.div>
                             )}
 
+                            {/* Submit Button */}
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full bg-slate-800 hover:bg-slate-700 text-white font-medium py-4 rounded-lg transition-all flex items-center justify-center gap-2 group text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full relative overflow-hidden bg-gradient-to-r from-[#00bfff] to-[#C56CEF] text-white font-bold py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group text-base disabled:opacity-70 disabled:cursor-not-allowed hover:shadow-[0_0_20px_rgba(197,108,239,0.4)] mt-4"
                             >
+                                {/* Glow wave effect */}
+                                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out pointer-events-none"></div>
+
                                 {isSubmitting ? (
                                     <>
-                                        <Loader2 size={20} className="animate-spin" />
-                                        Sending...
+                                        <Loader2 size={20} className="animate-spin relative z-10" />
+                                        <span className="relative z-10 font-mono tracking-widest text-sm">TRANSMITTING...</span>
                                     </>
                                 ) : (
                                     <>
-                                        <Send size={20} className="group-hover:translate-x-1 transition-transform" />
-                                        Send Message
+                                        <span className="relative z-10 tracking-widest uppercase font-mono text-sm group-hover:-translate-x-1 transition-transform">Send Message</span>
+                                        <Send size={18} className="group-hover:translate-x-1 transition-transform relative z-10 -mt-0.5" />
                                     </>
                                 )}
                             </button>
@@ -205,36 +193,56 @@ const Contact = () => {
                     </motion.div>
                 </div>
 
-                <div className="mt-20 pt-8 border-t border-slate-900 text-center text-slate-500 text-base">
-                    <p>© 2024 Aditya Raj. Designed with passion for data analytics.</p>
+                <div className="mt-24 pt-8 border-t border-white/5 text-center text-slate-500 text-sm font-light tracking-wide">
+                    <p>© 2026 Aditya Raj. All rights reserved.</p>
                 </div>
             </div>
         </section>
     );
 };
 
-const ContactItem = ({ icon, title, content, href }) => (
-    <div className="flex items-start gap-4">
-        <div className="p-3 bg-slate-950 rounded-lg border border-slate-800 text-cyan-400">
+// Reusable Input Component
+const InputField = ({ label, name, type = "text", placeholder, disabled }) => (
+    <div className="space-y-2 group">
+        <label className="text-xs font-semibold tracking-wide text-slate-400 uppercase ml-1 group-focus-within:text-[#00bfff] transition-colors">{label}</label>
+        <input
+            type={type}
+            name={name}
+            required
+            placeholder={placeholder}
+            className="w-full bg-[#0B0C10]/50 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-[#C56CEF] focus:ring-1 focus:ring-[#C56CEF] transition-all duration-300 text-sm font-light shadow-inner"
+            disabled={disabled}
+        />
+    </div>
+);
+
+const ContactItem = ({ icon, title, content, href, color }) => (
+    <div className="flex items-start gap-5 group">
+        <div className="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_15px_rgba(255,255,255,0.05)]"
+            style={{ backgroundColor: `${color}15`, color: color }}
+        >
             {icon}
         </div>
         <div>
-            <h4 className="text-white font-bold text-xl mb-1">{title}</h4>
+            <h4 className="text-white font-bold text-lg mb-1 tracking-tight">{title}</h4>
             {href ? (
-                <a href={href} className="text-slate-400 hover:text-cyan-400 transition-colors text-lg">{content}</a>
+                <a href={href} className="text-slate-400 font-light hover:text-white transition-colors text-sm md:text-base leading-relaxed" style={{ '--hover-color': color }} onMouseEnter={(e) => e.target.style.color = color} onMouseLeave={(e) => e.target.style.color = ''}>{content}</a>
             ) : (
-                <p className="text-slate-400 text-lg">{content}</p>
+                <p className="text-slate-400 font-light text-sm md:text-base leading-relaxed">{content}</p>
             )}
         </div>
     </div>
 );
 
-const SocialButton = ({ href, icon }) => (
+const SocialButton = ({ href, icon, color }) => (
     <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="p-3 bg-slate-950 rounded-lg border border-slate-800 text-slate-400 hover:text-white hover:border-cyan-500/50 transition-all"
+        className="w-12 h-12 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:text-white transition-all duration-300 hover:scale-110 hover:-translate-y-1 shadow-[0_4px_10px_rgba(0,0,0,0.2)]"
+        style={{ '--hover-border': `${color}50`, '--hover-bg': `${color}20` }}
+        onMouseEnter={(e) => { e.currentTarget.style.borderColor = color; Object.assign(e.currentTarget.style, { boxShadow: `0 0 15px ${color}30` }) }}
+        onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; Object.assign(e.currentTarget.style, { boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }) }}
     >
         {icon}
     </a>

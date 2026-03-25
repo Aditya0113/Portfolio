@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, BarChart, ShoppingCart, Globe, Linkedin, Car, Crosshair, MapPin } from 'lucide-react';
+import Tilt from 'react-parallax-tilt';
+import { Github, ExternalLink, BarChart, ShoppingCart, Globe, Linkedin, Car, Crosshair, MapPin, Play } from 'lucide-react';
 
 const Projects = () => {
     const projects = [
@@ -16,8 +17,10 @@ const Projects = () => {
             ],
             tech: ["Power BI", "Data Modeling", "DAX", "Forecasting"],
             github: "https://github.com/Aditya0113/TATA-Cars-Sales-Analytics-Dashboard",
-            icon: <Car size={32} className="text-white" />,
-            color: "cyan"
+            demo: "https://app.powerbi.com/view?r=eyJrIjoiZWJkNzkyOTgtZDRmYS00OWVjLTk0NDctYzNmMDAzMDZkODhkIiwidCI6ImUxNGU3M2ViLTUyNTEtNDM4OC04ZDY3LThmOWYyZTJkNWE0NiIsImMiOjEwfQ%3D%3D",
+            icon: <Car size={24} />,
+            themeColor: "#00bfff",
+            image: "/tata-cars.png"
         },
         {
             title: "US Traffic Accident Dashboard",
@@ -31,8 +34,9 @@ const Projects = () => {
             ],
             tech: ["Power BI", "Data Modeling", "DAX"],
             github: "https://github.com/Aditya0113/US-TRAFFIC-ACCIDENT-DASHBOARD",
-            icon: <Car size={32} className="text-white" />,
-            color: "red"
+            icon: <Car size={24} />,
+            themeColor: "#FF5F56",
+            image: "/us-traffic.png"
         },
         {
             title: "HR Attrition Analysis",
@@ -45,8 +49,9 @@ const Projects = () => {
             ],
             tech: ["Power BI", "Data Modeling", "DAX", "Python", "Pandas", "Scikit-Learn", "SHAP", "Matplotlib"],
             github: "https://github.com/Aditya0113/HR-Analytics-Employee-Attrition-Prediction",
-            icon: <BarChart size={32} className="text-white" />,
-            color: "purple"
+            icon: <BarChart size={24} />,
+            themeColor: "#C56CEF",
+            image: "/hr-attrition.png"
         },
         {
             title: "SuperStore Sales Dashboard",
@@ -59,13 +64,14 @@ const Projects = () => {
             ],
             tech: ["Power BI", "Data Modeling", "DAX", "Excel"],
             github: "https://github.com/Aditya0113/SuperStore-Sales-Dashboard",
-            icon: <ShoppingCart size={32} className="text-white" />,
-            color: "cyan"
+            icon: <ShoppingCart size={24} />,
+            themeColor: "#27C93F",
+            image: "/superstore.png"
         },
         {
             title: "E-Commerce Sales Tracker",
             subtitle: "Sales Performance & Customer Behavior Analysis",
-            description: "Developed an interactive and visually engaging dashboard in Power BI to analyze sales performance and customer behavior. The dashboard includes dynamic KPIs for Amount, Profit, Quantity, and AOV, along with detailed visual insights such as monthly profit trends, state-wise sales, category-wise distribution, and payment mode preferences.",
+            description: "Developed an interactive and visually engaging dashboard in Power BI to analyze sales performance and customer behavior. The dashboard includes dynamic KPIs for Amount, Profit, Quantity, and AOV, along with detailed visual insights such as monthly profit trends, state-wise sales, etc.",
             features: [
                 "Dynamic filtering by quarters and custom time ranges",
                 "Monthly profit trend analysis",
@@ -73,13 +79,14 @@ const Projects = () => {
             ],
             tech: ["Power BI", "Data Visualization", "KPI Analysis", "Dashboard Design"],
             github: "https://github.com/Aditya0113/E-COMMERCE-SALES-TRACKER",
-            icon: <MapPin size={32} className="text-white" />,
-            color: "blue"
+            icon: <MapPin size={24} />,
+            themeColor: "#00bfff",
+            image: "/ecommerce.png"
         },
         {
             title: "World Economic Indicators Analysis",
             subtitle: "Global Economic Trends & Insights",
-            description: "A comprehensive Python-based project analyzing global economic indicators including GDP, inflation, unemployment, and population growth using real-world datasets. Features advanced data cleaning, visualization, and trend analysis to uncover insights across countries and regions.",
+            description: "A comprehensive Python-based project analyzing global economic indicators including GDP, inflation, unemployment, and population growth using real-world datasets. Features advanced data cleaning, visualization, and trend analysis.",
             features: [
                 "Multi-country economic comparison",
                 "Time-series trend analysis",
@@ -87,108 +94,153 @@ const Projects = () => {
             ],
             tech: ["Python", "Pandas", "Matplotlib", "Seaborn", "Plotly"],
             github: "https://github.com/Aditya0113/World-Economic-Indicators-Analysis",
-            icon: <Globe size={32} className="text-white" />,
-            color: "purple"
+            icon: <Globe size={24} />,
+            themeColor: "#C56CEF",
+            image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80&w=800"
         },
         {
             title: "LinkedIn Profile Optimizer",
             subtitle: "AI-Powered Profile Enhancement",
-            description: "An AI-powered web application that analyzes and enhances LinkedIn profiles using advanced algorithms. Provides personalized recommendations to improve visibility, headline optimization, summary enhancement, and keyword alignment using AI APIs like Gemini.",
+            description: "An AI-powered web application that analyzes and enhances LinkedIn profiles using advanced algorithms. Provides personalized recommendations to improve visibility, headline optimization, summary enhancement, and keyword alignment using AI APIs.",
             features: [
                 "AI-powered profile analysis",
                 "Personalized recommendations",
                 "Keyword optimization suggestions"
             ],
-            tech: ["HTML", "CSS", "JavaScript", "AI APIs", "Gemini AI"],
+            tech: ["HTML", "CSS", "JavaScript", "Gemini AI"],
             github: "https://github.com/Aditya0113/LinkedIn_Profile_Optimizer",
             demo: "https://linkedin-profileoptimizer.vercel.app/",
-            icon: <Linkedin size={32} className="text-white" />,
-            color: "cyan"
+            icon: <Linkedin size={24} />,
+            themeColor: "#FFBD2E",
+            image: "/linkedin-optimizer.png"
         },
     ];
 
-    return (
-        <section id="projects" className="py-16 bg-slate-950 px-4">
-            <div className="max-w-5xl mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-20"
-                >
-                    <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">Featured <span className="text-cyan-400">Projects</span></h2>
-                    <div className="w-24 h-1 bg-cyan-500 mx-auto rounded-full opacity-50 mb-8"></div>
-                    <p className="text-slate-400 max-w-3xl mx-auto text-xl">
-                        Showcasing real-world data analysis projects that demonstrate expertise in visualization, statistical analysis, and business intelligence.
-                    </p>
-                </motion.div>
+    const headingText = "Featured Projects".split("");
 
-                <div className="space-y-12">
+    return (
+        <section id="projects" className="py-24 relative overflow-hidden px-4">
+            {/* Background elements */}
+            <div className="absolute top-[30%] left-[-20%] w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[150px] pointer-events-none" />
+
+            <div className="max-w-7xl mx-auto relative z-10">
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 flex justify-center flex-wrap">
+                        {headingText.map((letter, i) => (
+                            <motion.span
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4, delay: i * 0.05 }}
+                                className={letter === ' ' ? 'mr-3' : (i >= 8 ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#00bfff] to-[#C56CEF]' : '')}
+                            >
+                                {letter}
+                            </motion.span>
+                        ))}
+                    </h2>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5, duration: 0.8 }}
+                        className="text-slate-400 max-w-3xl mx-auto text-lg font-light tracking-wide"
+                    >
+                        Showcasing real-world data analysis projects that demonstrate expertise in visualization, statistical analysis, and business intelligence.
+                    </motion.p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     {projects.map((project, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="bg-slate-900/40 rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/30 transition-all group"
-                        >
-                            <div className="p-8 md:p-10">
-                                <div className="flex flex-col md:flex-row gap-8">
-                                    <div className="flex-1">
-                                        <div className="flex items-start gap-4 mb-6">
-                                            <div className={`p-4 rounded-xl bg-gradient-to-br ${project.color === 'cyan' ? 'from-cyan-500 to-blue-600' : project.color === 'red' ? 'from-red-500 to-orange-600' : 'from-purple-500 to-indigo-600'} shadow-lg`}>
+                        <Tilt key={index} tiltMaxAngleX={4} tiltMaxAngleY={4} scale={1.01} transitionSpeed={2000} className="w-full h-full">
+                            <motion.div
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1, duration: 0.7 }}
+                                className="glass-panel rounded-3xl overflow-hidden h-full flex flex-col group relative border border-white/5 hover:border-white/20 transition-all duration-500"
+                            >
+                                {/* Glowing Base Aura */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none" style={{ background: `radial-gradient(circle at center, ${project.themeColor}, transparent 80%)` }}></div>
+                                
+                                {/* Project Thumbnail Image */}
+                                <div className="w-full h-52 relative overflow-hidden shrink-0 border-b border-white/5">
+                                    <div className="absolute inset-0 bg-[#0B0C10] animate-pulse"></div>
+                                    <img 
+                                        src={project.image} 
+                                        alt={project.title} 
+                                        className="w-full h-full object-cover group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 z-10 relative"
+                                    />
+                                    {/* Gradient overlay to smoothly blend image into the card body */}
+                                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0d121c] to-transparent z-20"></div>
+                                </div>
+
+                                <div className="p-8 md:p-10 flex flex-col flex-grow relative z-10 h-full">
+                                    {/* Header Section */}
+                                    <div className="flex justify-between items-start mb-6 gap-4">
+                                        <div className="flex items-start gap-5">
+                                            <div 
+                                                className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)] group-hover:scale-110 transition-transform duration-500"
+                                                style={{ backgroundColor: `${project.themeColor}15`, color: project.themeColor, boxShadow: `0 0 15px ${project.themeColor}30` }}
+                                            >
                                                 {project.icon}
                                             </div>
                                             <div>
-                                                <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                                                <h3 className="text-2xl font-bold tracking-tight text-white mb-2 leading-tight group-hover:text-glow transition-all duration-300">
                                                     {project.title}
                                                 </h3>
-                                                <h4 className="text-slate-400 text-xl">{project.subtitle}</h4>
+                                                <span className="text-sm font-semibold tracking-wide uppercase font-mono" style={{ color: project.themeColor }}>
+                                                    {project.subtitle}
+                                                </span>
                                             </div>
                                         </div>
-
-                                        <p className="text-slate-300 mb-8 leading-relaxed text-xl">
-                                            {project.description}
-                                        </p>
-
-                                        <div className="mb-8">
-                                            <h5 className="text-white font-semibold mb-4 text-lg">Technologies Used</h5>
-                                            <div className="flex flex-wrap gap-3">
-                                                {project.tech.map((t, idx) => (
-                                                    <span key={idx} className={`text-base font-medium px-4 py-1.5 rounded-full ${project.color === 'cyan' ? 'bg-cyan-900/20 text-cyan-300 border border-cyan-500/30' : project.color === 'red' ? 'bg-red-900/20 text-red-300 border border-red-500/30' : 'bg-purple-900/20 text-purple-300 border border-purple-500/30'}`}>
-                                                        {t}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        <div className="flex gap-4">
+                                        {/* Action Links */}
+                                        <div className="flex gap-2 shrink-0 flex-col sm:flex-row">
                                             {project.demo && (
-                                                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-300 hover:text-white bg-slate-950 border border-slate-800 hover:border-slate-600 px-5 py-2.5 rounded-lg transition-all">
-                                                    <ExternalLink size={18} /> View Project
+                                                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center transition-all hover:scale-110 hover:bg-white/10" style={{ boxShadow: `0 0 10px ${project.themeColor}20` }} title="View Demo">
+                                                    <Play fill="currentColor" size={16} className="ml-1" />
                                                 </a>
                                             )}
-                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-300 hover:text-white bg-slate-950 border border-slate-800 hover:border-slate-600 px-5 py-2.5 rounded-lg transition-all">
-                                                <Github size={18} /> Source Code
+                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-slate-300 flex items-center justify-center transition-all hover:scale-110 hover:bg-white/10 hover:text-white" title="Source Code">
+                                                <Github size={18} />
                                             </a>
                                         </div>
                                     </div>
 
-                                    <div className="md:w-1/3 bg-slate-950/50 rounded-xl p-6 border border-slate-800/50">
-                                        <h5 className="text-white font-semibold mb-4 border-b border-slate-800 pb-2 text-lg">Key Features</h5>
-                                        <ul className="space-y-3">
-                                            {project.features.map((feature, idx) => (
-                                                <li key={idx} className="flex items-start gap-3 text-slate-400 text-base">
-                                                    <div className={`w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0 ${project.color === 'cyan' ? 'bg-cyan-500' : project.color === 'red' ? 'bg-red-500' : 'bg-purple-500'}`}></div>
+                                    {/* Reveal-on-Hover Interface Hint */}
+                                    <div className="flex items-center gap-2 mb-2 opacity-100 group-hover:opacity-0 transition-opacity duration-300 absolute bottom-10 right-10">
+                                        <span className="text-xs tracking-widest uppercase font-mono text-slate-500">Hover Details</span>
+                                        <div className="w-8 h-1 bg-slate-800 rounded-full overflow-hidden">
+                                            <div className="h-full bg-slate-500 w-1/3 animate-[translateX_2s_infinite]"></div>
+                                        </div>
+                                    </div>
+
+                                    {/* Hover Reveal Content (Blur -> Clear) */}
+                                    <div className="flex flex-col flex-grow blur-[8px] opacity-30 group-hover:blur-0 group-hover:opacity-100 translate-y-6 group-hover:translate-y-0 transition-all duration-700 ease-out relative z-20">
+                                        <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-6 font-light">
+                                            {project.description}
+                                        </p>
+
+                                        <ul className="space-y-3 mb-8">
+                                            {project.features.map((feature, fIdx) => (
+                                                <li key={fIdx} className="flex items-start gap-3 text-sm text-slate-400 font-light">
+                                                    <span className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: project.themeColor, boxShadow: `0 0 8px ${project.themeColor}` }}></span>
                                                     {feature}
                                                 </li>
                                             ))}
                                         </ul>
+
+                                        <div className="flex flex-wrap gap-2 mt-auto">
+                                            {project.tech.map((t, idx) => (
+                                                <span key={idx} className="text-xs font-mono font-medium px-3 py-1.5 rounded-lg border backdrop-blur-md transition-colors" style={{ backgroundColor: `${project.themeColor}10`, borderColor: `${project.themeColor}30`, color: project.themeColor }}>
+                                                    {t}
+                                                </span>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </motion.div>
+                            </motion.div>
+                        </Tilt>
                     ))}
                 </div>
             </div>
