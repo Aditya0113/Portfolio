@@ -84,7 +84,7 @@ const About = () => {
                         <div>
                             <h3 className="text-3xl font-bold text-white mb-6 tracking-tight flex items-center gap-3">
                                 <span className="w-8 h-1 bg-gradient-to-r from-[#C56CEF] to-transparent rounded-full"></span>
-                                My Data Philosophy
+                                Career Overview
                             </h3>
                             <div className="glass-panel p-6 md:p-8 rounded-2xl relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-3xl"></div>
