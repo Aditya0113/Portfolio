@@ -96,7 +96,7 @@ const Hero = () => {
                         className="flex flex-col sm:flex-row gap-5 justify-center md:justify-start items-center mb-12 w-full"
                     >
                         <a
-                            href="https://drive.google.com/file/d/1msSBuF32u1ZfDnp2dCA8YKsgBUkFMA-q/view?usp=sharing"
+                            href="https://drive.google.com/file/d/1xaMwWYSU81UXG_PIXqlm9YIO2FDgV7gg/view?usp=sharing"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center gap-3 glass-panel text-white px-8 py-4 rounded-xl hover:shadow-[inset_0_0_20px_rgba(197,108,239,0.5)] transition-all duration-300 group w-full sm:w-auto"
