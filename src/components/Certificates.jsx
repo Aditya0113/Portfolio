@@ -87,7 +87,7 @@ const Certificates = () => {
         },
     ];
 
-    const headingText = "Certifications".split("");
+    const headingText = "Certificates".split("");
 
     return (
         <section id="certificates" className="py-24 relative overflow-hidden px-4 min-h-[100vh]">
