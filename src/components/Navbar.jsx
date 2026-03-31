@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, User, Briefcase, Cpu, FolderGit2, Award, Mail, Home } from 'lucide-react';
+import { Menu, X, User, Briefcase, Cpu, FolderGit2, Award, Mail, Home, Terminal } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -11,23 +11,37 @@ const Navbar = () => {
     useEffect(() => {
         setMounted(true);
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    const navItem = navLinks.find(link => link.href === `#${id}`);
-                    if (navItem) {
-                        setActiveSection(navItem.name);
+        const handleScroll = () => {
+            const sectionMap = [
+                { id: 'home', name: 'Home' },
+                { id: 'about', name: 'About' },
+                { id: 'experience', name: 'Experience' },
+                { id: 'skills', name: 'Skills' },
+                { id: 'code', name: 'Code' },
+                { id: 'projects', name: 'Projects' },
+                { id: 'certificates', name: 'Certificates' },
+                { id: 'contact', name: 'Contact' }
+            ];
+            
+            let current = 'Home';
+            for (const section of sectionMap) {
+                const element = document.getElementById(section.id);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    // If the section top crosses the 40% height of viewport
+                    if (rect.top <= window.innerHeight * 0.4) {
+                        current = section.name;
                     }
                 }
-            });
-        }, { threshold: 0.3, rootMargin: "-10% 0px -50% 0px" });
+            }
+            
+            setActiveSection((prev) => current !== prev ? current : prev);
+        };
 
-        document.querySelectorAll('section[id]').forEach((section) => {
-            observer.observe(section);
-        });
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // Check once on mount
 
-        return () => observer.disconnect();
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     // Prevent scrolling when menu is open
@@ -44,6 +58,7 @@ const Navbar = () => {
         { name: 'About', href: '#about', icon: <User size={20} /> },
         { name: 'Experience', href: '#experience', icon: <Briefcase size={20} /> },
         { name: 'Skills', href: '#skills', icon: <Cpu size={20} /> },
+        { name: 'Code', href: '#code', icon: <Terminal size={20} /> },
         { name: 'Projects', href: '#projects', icon: <FolderGit2 size={20} /> },
         { name: 'Certificates', href: '#certificates', icon: <Award size={20} /> },
         { name: 'Contact', href: '#contact', icon: <Mail size={20} /> },
@@ -72,8 +87,7 @@ const Navbar = () => {
                         {/* Avatar & Name Area (Left Side of Pill) */}
                         <div className="flex items-center gap-4 pl-2 shrink-0 lg:w-[220px]">
                             <div className="w-[42px] h-[42px] rounded-full bg-gradient-to-br from-[#00bfff] to-[#C56CEF] flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(0,191,255,0.3)] relative overflow-hidden">
-                                <div className="absolute inset-[1.5px] bg-[#0B0C10] rounded-full z-0"></div>
-                                <span className="text-sm font-bold text-white z-10 tracking-widest pl-0.5">AR</span>
+                                <img src="/aditya-profile.jpg" alt="Aditya Raj" className="absolute inset-[1.5px] w-[calc(100%-3px)] h-[calc(100%-3px)] rounded-full object-cover z-10" />
                             </div>
                             <div className="flex flex-col justify-center">
                                 <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#00bfff] mb-0.5">Portfolio</span>
@@ -82,19 +96,28 @@ const Navbar = () => {
                         </div>
 
                         {/* Navigation Links Area (Right side of Pill) */}
-                        <div className="hidden lg:flex flex-1 items-center justify-end gap-1 pr-2">
+                        <div className="hidden lg:flex flex-1 items-center justify-end gap-1 pr-2 relative">
                             {navLinks.map((link) => (
                                 <a
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setActiveSection(link.name)}
-                                    className={`px-5 py-2.5 rounded-full text-[13px] font-semibold tracking-wider transition-all duration-300 relative overflow-hidden ${
+                                    className={`px-5 py-2.5 rounded-full text-[13px] font-semibold tracking-wider transition-colors duration-300 relative group ${
                                         activeSection === link.name 
-                                            ? 'text-white bg-white/10 shadow-md' 
+                                            ? 'text-white' 
                                             : 'text-slate-400 hover:text-white hover:bg-white/5'
                                     }`}
                                 >
-                                    {link.name}
+                                    {activeSection === link.name && (
+                                        <motion.div
+                                            layoutId="navbar-indicator"
+                                            className="absolute inset-0 bg-white/5 rounded-full z-0 pointer-events-none"
+                                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                        >
+                                            <div className="absolute bottom-1 left-5 right-5 h-[1px] bg-white rounded-full"></div>
+                                        </motion.div>
+                                    )}
+                                    <span className="relative z-10">{link.name}</span>
                                 </a>
                             ))}
                         </div>

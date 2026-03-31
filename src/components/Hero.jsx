@@ -74,9 +74,9 @@ const Hero = () => {
                             initial={{ opacity: 0, x: 30 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.6, duration: 0.8 }}
-                            className="text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#C56CEF] to-[#00bfff] font-bold tracking-wide"
+                            className="text-xl md:text-2xl text-white font-bold tracking-wide"
                         >
-                            Data Analyst & Business Intelligence Specialist
+                            Data Analyst | Business Intelligence | AI & ML Enthusiast
                         </motion.h2>
                     </div>
 

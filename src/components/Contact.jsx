@@ -64,7 +64,7 @@ const Contact = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                                className={letter === ' ' ? 'mr-3' : (i >= 7 ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#00bfff] to-[#C56CEF]' : '')}
+                                className={letter === ' ' ? 'mr-3' : 'text-white'}
                             >
                                 {letter}
                             </motion.span>

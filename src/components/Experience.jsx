@@ -21,7 +21,7 @@ const Experience = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                                className={letter === ' ' ? 'mr-3' : (i >= 5 ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#C56CEF] to-[#00bfff]' : '')}
+                                className={letter === ' ' ? 'mr-3' : 'text-white'}
                             >
                                 {letter}
                             </motion.span>
