@@ -7,17 +7,17 @@ const Skills = () => {
         {
             title: "PROGRAMMING",
             color: "#00bfff",
-            skills: ["PYTHON", "C", "C++", "JAVA", "JAVASCRIPT", "KOTLIN"]
+            skills: ["PYTHON", "C", "C++", "JAVA", "JAVASCRIPT"]
         },
         {
             title: "ML & DATA SCIENCE",
             color: "#C56CEF",
-            skills: ["MACHINE LEARNING", "PANDAS / NUMPY", "SCIKIT-LEARN", "PYTORCH", "OPENCV", "MATPLOTLIB"]
+            skills: ["MACHINE LEARNING", "PANDAS / NUMPY", "SCIKIT-LEARN", "SEABORN", "OPENCV", "MATPLOTLIB", "PLOTLY", "TENSORFLOW", "PYTORCH"]
         },
         {
             title: "BI & ANALYTICS",
             color: "#FF5F56",
-            skills: ["POWER BI", "EXCEL", "TABLEAU", "DATA MODELING", "FORECASTING"]
+            skills: ["POWER BI", "EXCEL", "TABLEAU", "DATA MODELING", "FORECASTING", "SQL"]
         },
         {
             title: "TOOLS & APIS",
